@@ -86,6 +86,7 @@ a {
   justify-content: center;
   flex-direction: column;
   width: 30%;
+  min-width: 250px;
   margin: 10px;
 }
 .description-container{
@@ -94,6 +95,7 @@ a {
   flex-direction: column;
   text-align: left;
   width: 30%;
+  min-width: 250px;
   margin : 10px;
 }
 </style>
