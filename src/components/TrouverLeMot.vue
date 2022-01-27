@@ -7,7 +7,12 @@
     </div>
     <div class="words-container" shadow="">
       <h5>Le mot du jour est : {{wordOfTheDay}}</h5>
-      <h5>Le mot de demain est : {{wordOfTommorow}}</h5>
+      <div class="mot-spoil-container">
+        <h5>Le mot de demain est : </h5>
+        <div class="mot-spoil-gris-container">
+          <h5 id="mot-spoil">{{wordOfTommorow}}</h5>
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -34,6 +39,8 @@ export default {
             const formatedDate = this.today.format('YYYY-M-D');
             const seed = seedrandom(formatedDate);
             const random = seed();
+            console.log(random);
+            console.log(Math.floor(random * (this.words.indexOf('PIZZA') + 1)));
             this.wordOfTheDay = this.words[Math.floor(random * (this.words.indexOf('PIZZA') + 1))];
 
             // Forcing temporaire pour éviter de changer le mot du jour de déploiement
@@ -44,6 +51,8 @@ export default {
             const formatedDate = this.tommorow.format('YYYY-M-D');
             const seed = seedrandom(formatedDate);
             const random = seed();
+            console.log(random);
+            console.log(Math.floor(random * (this.words.indexOf('PIZZA') + 1)));
             this.wordOfTommorow = this.words[Math.floor(random * (this.words.indexOf('PIZZA') + 1))];
 
             // Forcing temporaire pour éviter de changer le mot du jour de déploiement
@@ -97,5 +106,27 @@ a {
   width: 30%;
   min-width: 250px;
   margin : 10px;
+}
+.mot-spoil-container{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+.mot-spoil-gris-container{
+  display: flex;
+  flex-direction: center;
+  align-items: center;
+  background-color: #7c7c7c7c;
+  border-radius: 2px;
+  height: 20px;
+  margin: 10px;
+}
+.mot-spoil-gris-container:hover{
+  background-color: #ffffff;
+}
+#mot-spoil{
+  color: #bfbfbf;
+  
 }
 </style>
