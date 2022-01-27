@@ -2,7 +2,7 @@
   <div class="main">
     <div class="description-container" shadow="">
       <h5>Cet outil permet de trouver le mot du jour du jeu motus accessible via le lien :  </h5>
-      <a>https://wordle.louan.me</a>
+      <a href="https://wordle.louan.me">https://wordle.louan.me</a>
       <h5>Cet outil est un outil de triche, il n'est pas à mettre aux mains de n'importe qui.</h5>
     </div>
     <div class="words-container" shadow="">
