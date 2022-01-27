@@ -9,5 +9,5 @@ cd dist
 git init
 git add -A
 git commit -m 'deploy'
-git push -f git@github.com:AlexisMerienne/hello-world.git main:gh-pages
+git push -f git@github.com/AlexisMerienne/trouver-le-mot.git main:gh-pages
 cd -
