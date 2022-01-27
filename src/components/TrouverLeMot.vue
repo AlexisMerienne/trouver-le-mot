@@ -1,6 +1,14 @@
 <template>
-  <div class="hello">
-    <h5>Le mot du jour est : {{wordOfTheDay}}</h5>
+  <div class="main">
+    <div class="description-container" shadow="">
+      <h5>Cet outil permet de trouver le mot du jour du jeu motus accessible via le lien :  </h5>
+      <a>https://wordle.louan.me</a>
+      <h5>Cet outil est un outil de triche, il n'est pas à mettre aux mains de n'importe qui</h5>
+    </div>
+    <div class="words-container" shadow="">
+      <h5>Le mot du jour est : {{wordOfTheDay}}</h5>
+      <h5>Le mot de demain est : {{wordOfTommorow}}</h5>
+    </div>
   </div>
 </template>
 
@@ -16,7 +24,9 @@ export default {
     return {
       words : listemot.liste,
       wordOfTheDay : '',
+      wordOfTommorow : '',
       today: moment(),
+      tommorow : moment().add(1,'days')
     };
   },
   methods : {
@@ -30,9 +40,21 @@ export default {
             if (formatedDate === '2022-1-14')
                 this.wordOfTheDay = 'SMURA'.split('').reverse().join('')
         },
+      getWordOfTommorow() {
+            const formatedDate = this.tommorow.format('YYYY-M-D');
+            const seed = seedrandom(formatedDate);
+            const random = seed();
+            this.wordOfTommorow = this.words[Math.floor(random * (this.words.indexOf('PIZZA') + 1))];
+
+            // Forcing temporaire pour éviter de changer le mot du jour de déploiement
+            if (formatedDate === '2022-1-14')
+                this.wordOfTommorow = 'SMURA'.split('').reverse().join('')
+        
+      }
   },
   mounted(){
     this.getWordOfTheDay();
+    this.getWordOfTommorow();
   }
 }
 </script>
@@ -52,5 +74,26 @@ li {
 }
 a {
   color: #42b983;
+}
+.main{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+.words-container{
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  width: 30%;
+  margin: 10px;
+}
+.description-container{
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  text-align: left;
+  width: 30%;
+  margin : 10px;
 }
 </style>
