@@ -1,16 +1,26 @@
 <template>
   <div class="main">
-    <div class="description-container" shadow="">
-      <h5>Cet outil permet de trouver le mot du jour du jeu motus accessible via le lien :  </h5>
-      <a href="https://wordle.louan.me">https://wordle.louan.me</a>
-      <h5>Cet outil est un outil de triche, il n'est pas à mettre aux mains de n'importe qui.</h5>
+    <div class="'some-space" style="width:100%;height:60px"></div>
+    <div class="description-container">
+      <div class="text-description">
+        <h5>Cet outil permet de trouver le mot du jour du jeu motus accessible via le lien :  </h5>
+        <a href="https://wordle.louan.me">https://wordle.louan.me</a>
+        <h5>Cet outil est un outil de triche, il n'est pas à mettre aux mains de n'importe qui.</h5>
+      </div>
     </div>
-    <div class="words-container" shadow="">
-      <h5>Le mot du jour est : {{wordOfTheDay}}</h5>
-      <div class="mot-spoil-container">
-        <h5>Le mot de demain est : </h5>
-        <div class="mot-spoil-gris-container">
-          <h5 id="mot-spoil">{{wordOfTommorow}}</h5>
+    <div id='flip-card' class="flip-card">
+      <div id='flip-card-container' class="flip-card-container">
+        <div class="word-card-container" v-on:click="rotate()">
+          <h5>Clique ici pour découvrir le mot du jour</h5>
+        </div>
+        <div id="words-container" class="words-container" v-on:click="rotateback()">
+          <h5>Le mot du jour est : {{wordOfTheDay}}</h5>
+          <div class="mot-spoil-container">
+            <h5>Le mot de demain est : </h5>
+            <div class="mot-spoil-gris-container">
+              <h5 id="mot-spoil">{{wordOfTommorow}}</h5>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -59,6 +69,16 @@ export default {
             if (formatedDate === '2022-1-14')
                 this.wordOfTommorow = 'SMURA'.split('').reverse().join('')
         
+      },
+      rotate() {
+      
+        //document.getElementById('flip-card').style.transform = "rotateY(180deg)";
+        document.getElementById('flip-card-container').style.transform = "rotateY(180deg)";
+        
+      },
+      rotateback(){
+        document.getElementById('flip-card').style.transform = "rotateY(0deg)";
+        document.getElementById('flip-card-container').style.transform = "rotateY(0deg)";
       }
   },
   mounted(){
@@ -89,24 +109,73 @@ a {
   justify-content: center;
   align-items: center;
   flex-direction: column;
-}
-.words-container{
-  display: flex;
-  justify-content: center;
-  flex-direction: column;
-  width: 30%;
-  min-width: 250px;
-  margin: 10px;
+  height: 100%;
+  width: 100%;
 }
 .description-container{
   display: flex;
   justify-content: center;
   flex-direction: column;
-  text-align: left;
-  width: 30%;
+  background-color: #ffffff;
+  border-radius: 7px;
+  margin: 10px;
+  width: 35%;
   min-width: 250px;
   margin : 10px;
 }
+.text-description{
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  text-align: left;
+  margin: 20px;
+
+}
+.flip-card{
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  width: 35%;
+  min-width: 250px;
+  height : 150px;
+  margin: 10px;
+  background-color: transparent;
+  border-radius: 7px;
+  perspective: 1000px; /* Remove this if you don't want the 3D effect */
+}
+.flip-card-container{
+  position: relative;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  transition: transform 0.8s;
+  transform-style: preserve-3d;
+}
+/* Do an horizontal flip when you move the mouse over the flip box container */
+.flip-card:hover {
+  cursor: pointer;
+}
+
+.word-card-container, .words-container {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 7px;
+  -webkit-backface-visibility: hidden; /* Safari */
+  backface-visibility: hidden;
+}
+.word-card-container{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #ffffff;
+}
+.words-container{
+  background-color: #ffffff;
+  transform: rotateY(180deg);
+}
+
+
 .mot-spoil-container{
   display: flex;
   flex-direction: row;
@@ -122,6 +191,7 @@ a {
   height: 20px;
   margin: 10px;
 }
+
 .mot-spoil-gris-container:hover{
   background-color: #ffffff;
 }
