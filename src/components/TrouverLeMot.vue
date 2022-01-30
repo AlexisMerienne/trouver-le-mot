@@ -15,6 +15,9 @@
         </div>
         <div id="words-container" class="words-container" v-on:click="rotateback()">
           <h5>Le mot du jour est : {{wordOfTheDay}}</h5>
+          <div class='definition-button' v-on:click="goToDefinition()">
+            <h5>Definition</h5>
+          </div>
           <div class="mot-spoil-container">
             <h5>Le mot de demain est : </h5>
             <div class="mot-spoil-gris-container">
@@ -24,24 +27,32 @@
         </div>
       </div>
     </div>
+    <div class="'definition" v-if="showdefinition">
+      <Definition v-bind:mot="wordOfTheDay"></Definition>
+    </div>
   </div>
 </template>
-
 <script>
 
 import * as seedrandom from 'seedrandom';
 import moment from 'moment-timezone';
 import listemot from '../data/listemot.json';
 
+import Definition from './Definition.vue';
+
 export default {
   name: 'TrouverLeMot',
+  components : {
+    Definition
+  },
   data() {
     return {
       words : listemot.liste,
       wordOfTheDay : '',
       wordOfTommorow : '',
       today: moment(),
-      tommorow : moment().add(1,'days')
+      tommorow : moment().add(1,'days'),
+      showdefinition : false,
     };
   },
   methods : {
@@ -79,6 +90,9 @@ export default {
       rotateback(){
         document.getElementById('flip-card').style.transform = "rotateY(0deg)";
         document.getElementById('flip-card-container').style.transform = "rotateY(0deg)";
+      },
+      goToDefinition(){
+        this.showdefinition = true;
       }
   },
   mounted(){
@@ -171,6 +185,10 @@ a {
   background-color: #ffffff;
 }
 .words-container{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
   background-color: #ffffff;
   transform: rotateY(180deg);
 }
@@ -190,6 +208,20 @@ a {
   border-radius: 2px;
   height: 20px;
   margin: 10px;
+}
+.definition-button{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border : solid;
+  border-color: #7c7c7c7c;
+  border-radius: 7px;
+  width: 30%;
+  height: 10%;
+  background-color: white;
+}
+.definition-button:hover{
+  background-color: lightgrey;
 }
 
 .mot-spoil-gris-container:hover{
