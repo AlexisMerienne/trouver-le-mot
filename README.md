@@ -1,5 +1,10 @@
 # trouver-le-mot
 
+## Website
+```
+https://alexismerienne.github.io/trouver-le-mot/
+```
+
 ## Project setup
 ```
 npm install
